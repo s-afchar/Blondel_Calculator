@@ -104,6 +104,9 @@ def DrawResults (Steps, Tread, Riser):
      Total_Length = str(round((Tread*Steps),2))
      Total_Height = str(round((Riser*Steps),2))
 
+     space = "   "
+     floor = "_______"
+
      print(" ")
      print("_   "+ "___" + "------------------ Total height = " + Total_Height + " cm")
      print("   |"+ "   |___")
@@ -115,7 +118,6 @@ def DrawResults (Steps, Tread, Riser):
             space = space + "    "
             floor = floor + "____"
         print("   |"+ space + "|___")
-
 
      space = space + "    "
 
