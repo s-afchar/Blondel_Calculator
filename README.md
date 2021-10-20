@@ -18,9 +18,11 @@ This is the first time I write Python code, so it might be garbage. Indeed, for 
 
 ### Data
 
-* H = 250 cm ; L = 370 cm --> Blondel = 57,33
-* H = 58 cm ; L = 100 cm --> Blondel = 62,99
-* H = 250 cm ; L = 450 cm --> Blondel = 61
+| Height (cm)   |  Width (cm)   |  Blondel formula output  |
+| :-----------: |:-------------:| ------------------------:|
+| 250           | 370           | 57,33                    |
+| 250           | 450           | 61                       |
+| 58            | 100           | 62,99                    |
 
 ## Author
 
