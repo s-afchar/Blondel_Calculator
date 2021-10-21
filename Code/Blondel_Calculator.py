@@ -80,10 +80,10 @@ def showResults(tread, riser, steps):
         DrawResults(steps, tread, riser)
 
     else:
-        Total_Length = str(round((tread*steps),2))
-        Total_Height = str(round((riser*steps),2))
-        print("Total length = " + Total_Length + " cm")
-        print("Total Height = " + Total_Height + " cm")
+        total_length = str(round((tread*steps),2))
+        total_height = str(round((riser*steps),2))
+        print("Total length = " + total_length + " cm")
+        print("Total Height = " + total_height + " cm")
 
     print(" ")
     print(" ")
@@ -94,48 +94,48 @@ def showResults(tread, riser, steps):
 def DrawResults (steps, tread, riser):
     """Draw a stair diagramm in the Terminal, with the computed number of steps."""
 
-    Total_Length = str(round((tread*steps),2))
-    Total_Height = str(round((riser*steps),2))
+    total_length = str(round((tread*steps),2))
+    total_height = str(round((riser*steps),2))
 
-    Space = "   "
-    Floor = "_______"
+    space = "   "
+    floor = "_______"
 
     print(" ")
-    print("_   "+ "___" + "------------------ Total height = " + Total_Height + " cm")
+    print("_   "+ "___" + "------------------ Total height = " + total_height + " cm")
     print("   |"+ "   |___")
 
     for i in range(1, steps-2):
-       Space = "   "
-       Floor = "_______"
+       space = "   "
+       floor = "_______"
        for j in range(0,i):
-           Space = Space + "    "
-           Floor = Floor + "____"
-       print("   |"+ Space + "|___")
+           space = space + "    "
+           floor = floor + "____"
+       print("   |"+ space + "|___")
 
-    Space = Space + "    "
+    space = space + "    "
 
-    print("   |"+ Space + "|___")
-    print("_  |"+ Floor + "____|" + "< Total length = " + Total_Length + " cm")
+    print("   |"+ space + "|___")
+    print("_  |"+ floor + "____|" + "< Total length = " + total_length + " cm")
 
 def Error():
     """Show an error message. And start the programm again"""
 
     print("")
-    Very_Funny_Joke = random.randint(1,5)
+    very_funny_joke = random.randint(1,5)
 
-    if Very_Funny_Joke == 1:
+    if very_funny_joke == 1:
         print("*François Blondel has left the chat*")
 
-    elif Very_Funny_Joke == 2:
+    elif very_funny_joke == 2:
         print("*François Blondel is rolling in his grave*")
 
-    elif Very_Funny_Joke == 3:
+    elif very_funny_joke == 3:
         print("*François Blondel would like to know why you hate him*")
 
-    elif Very_Funny_Joke == 4:
+    elif very_funny_joke == 4:
         print("*François Blondel has blocked you*")
 
-    elif Very_Funny_Joke == 5:
+    elif very_funny_joke == 5:
         print("*François Blondel is sad*")
 
     print("You are trying to make me compute a stair that is WAY TOO STEEP")
