@@ -1,120 +1,140 @@
-#NAME
-
-#Functions
+# October 2021 - Sâm AFCHAR - EPFL
 
 import math
 import random
 
-def Main():
+#Functions
+
+def askInput():
+    """Ask user for input, check its validity then lauch the calculation."""
 
     try:
-        Floor_Height = int(input("Floor to floor height (in cm) : "))
-        Stairs_Length = int(input("Available length (in cm) : "))
-        ComputeBlondel(Floor_Height, Stairs_Length)
+        floor_height = int(input("Floor to floor height (in cm) : "))
+        stairs_length = int(input("Available length (in cm) : "))
+        computeBlondel(floor_height, stairs_length)
+
     except ValueError:
         print("Not a valid Number - Starting over")
         print("----------------")
-        Main()
+        askInput()
 
-def ComputeBlondel(F2F_Height, Stairs_Max_Length):
+def computeBlondel(available_height, available_length):
+    """Calculate a stair configuration that meets as closely as possible the Blondel criteria.
+    (i.e. : (2 * RISER) + TREAD = 61)"""
 
-    Steps = round(F2F_Height / 17)
+    BLONDEL_TARGET = 61
+    TREAD_MIN = 24 
+    TREAD_MAX = 35 # Comfortable range for the step depth = [24 - 35 cm]
+    RISER_MAX = 17 # A step higher than 17 cm is not comfortable
 
-    Blondel = 63
+    blondel = 63 # I needed to assign a value
 
-    Target_Value = 61
-    Tread_Min = 24
-    Tread_Max = 35
+    steps = round(available_height / RISER_MAX)
 
-    if Steps != 0:
-        Riser = F2F_Height / Steps
-        Tread = Target_Value - 2 * Riser
+    if steps != 0:
+        riser = available_height / steps
+        tread = BLONDEL_TARGET - 2 * riser
 
-        if Tread >= Tread_Min and Tread <= Tread_Max and Tread * Steps <= Stairs_Max_Length:
-            ShowResults(Tread, Riser, Steps)
+        if tread >= TREAD_MIN and tread <= TREAD_MAX and tread * steps <= available_length:
+            showResults(tread, riser, steps)
+
         else:
+            tread = round(available_length / steps)
+            if tread >= TREAD_MIN and tread <= TREAD_MAX and tread * steps <= available_length:
+                showResults(tread, riser, steps)
 
-            Tread = round(Stairs_Max_Length / Steps)
-
-            if Tread >= Tread_Min and Tread <= Tread_Max and Tread * Steps <= Stairs_Max_Length:
-                ShowResults(Tread, Riser, Steps)
             else:
-                Tread = math.floor(Stairs_Max_Length / Steps)
-                if Tread >= Tread_Min and Tread <= Tread_Max and Tread * Steps <= Stairs_Max_Length:
-                    ShowResults(Tread, Riser, Steps)
+                tread = math.floor(available_length / steps)
+                if tread >= TREAD_MIN and tread <= TREAD_MAX and tread * steps <= available_length:
+                    showResults(tread, riser, steps)
+
                 else:
-                    while Tread > Tread_Max:
-                        Blondel = Blondel - 0.01
-                        Tread = Blondel - 2 * Riser
-                    if Tread >= Tread_Min and Tread <= Tread_Max and Tread * Steps <= Stairs_Max_Length:
-                        ShowResults(Tread, Riser, Steps)
+                    while tread > TREAD_MAX:
+                        blondel = blondel - 0.01
+                        tread = blondel - 2 * riser
+
+                    if tread >= TREAD_MIN and tread <= TREAD_MAX and tread * steps <= available_length:
+                        showResults(tread, riser, steps)
+
                     else:
                         Error()
     else:
         print("Ok.")
 
-def ShowResults(Tread, Riser, Steps):
+def showResults(tread, riser, steps):
+    """Show the results in the Terminal. Then start the programm again.
+    (Usually I compute a bunch of stairs in a row, so I wanted a loop)"""
 
-    Blondel = round(2 * Riser + Tread, 2)
+    blondel = round(2 * riser + tread, 2)
+
     print("----------------")
+    print(" ") # I don't know how to do line breaks
     print(" ")
-    print(" ")
-    print("Tread length = ",round(Tread,2)," cm")
-    print("Riser height = ",round(Riser,2)," cm")
-    print(Steps," steps")
-    print("Blondel : ", Blondel)
 
-    if Steps < 25 and Steps >1:
-        DrawResults(Steps, Tread, Riser)
+    print("tread length = ",round(tread,2)," cm")
+    print("riser height = ",round(riser,2)," cm")
+    print(steps," steps")
+    print("Blondel : ", blondel)
+
+    if steps < 25 and steps >1: # Don't draw the stair diagramm if there are too many steps.
+        DrawResults(steps, tread, riser)
+
     else:
-        Total_Length = str(round((Tread*Steps),2))
-        Total_Height = str(round((Riser*Steps),2))
+        Total_Length = str(round((tread*steps),2))
+        Total_Height = str(round((riser*steps),2))
         print("Total length = " + Total_Length + " cm")
         print("Total Height = " + Total_Height + " cm")
 
     print(" ")
     print(" ")
     print("----------------")
-    Main()
 
-def DrawResults (Steps, Tread, Riser):
+    askInput()
 
-     Total_Length = str(round((Tread*Steps),2))
-     Total_Height = str(round((Riser*Steps),2))
+def DrawResults (steps, tread, riser):
+    """Draw a stair diagramm in the Terminal, with the computed number of steps."""
 
-     Space = "   "
-     Floor = "_______"
+    Total_Length = str(round((tread*steps),2))
+    Total_Height = str(round((riser*steps),2))
 
-     print(" ")
-     print("_   "+ "___" + "------------------ Total height = " + Total_Height + " cm")
-     print("   |"+ "   |___")
+    Space = "   "
+    Floor = "_______"
 
-     for i in range(1, Steps-2):
-        Space = "   "
-        Floor = "_______"
-        for j in range(0,i):
-            Space = Space + "    "
-            Floor = Floor + "____"
-        print("   |"+ Space + "|___")
+    print(" ")
+    print("_   "+ "___" + "------------------ Total height = " + Total_Height + " cm")
+    print("   |"+ "   |___")
 
-     Space = Space + "    "
+    for i in range(1, steps-2):
+       Space = "   "
+       Floor = "_______"
+       for j in range(0,i):
+           Space = Space + "    "
+           Floor = Floor + "____"
+       print("   |"+ Space + "|___")
 
-     print("   |"+ Space + "|___")
-     print("_  |"+ Floor + "____|" + "< Total length = " + Total_Length + " cm")
+    Space = Space + "    "
+
+    print("   |"+ Space + "|___")
+    print("_  |"+ Floor + "____|" + "< Total length = " + Total_Length + " cm")
 
 def Error():
+    """Show an error message. And start the programm again"""
 
     print("")
     Very_Funny_Joke = random.randint(1,5)
 
     if Very_Funny_Joke == 1:
         print("*François Blondel has left the chat*")
+
     elif Very_Funny_Joke == 2:
         print("*François Blondel is rolling in his grave*")
+
     elif Very_Funny_Joke == 3:
         print("*François Blondel would like to know why you hate him*")
+
     elif Very_Funny_Joke == 4:
         print("*François Blondel has blocked you*")
+
     elif Very_Funny_Joke == 5:
         print("*François Blondel is sad*")
 
@@ -123,8 +143,9 @@ def Error():
     print("Let's try again...")
     print("(Try to increase length or decrease height)")
     print("")
-    Main()
+
+    askInput()
 
 #Launch amazing programm
 
-Main()
+askInput() # FINALLY
