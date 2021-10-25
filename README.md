@@ -7,7 +7,7 @@ This is the first time I write Python code, so it might be bad. Indeed, for the 
  
 ![Alt text](Images/Screenshot.jpg "Screenshot")
 
-This program computes a straight stair based on the Blondel formula (2R + T = 61).
+This program computes a straight stair based on the Blondel formula (2R + T = 61). (I am both an GC and Architecture student, believe me or not, this little piece of code is a time saver when I am a bit charrette).
 
 ## Getting started
 
