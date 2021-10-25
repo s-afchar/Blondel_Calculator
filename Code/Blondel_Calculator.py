@@ -6,7 +6,7 @@ import random
 #Functions
 
 def askInput():
-    """Ask user for input, check its validity then lauch the calculation."""
+    """Ask user for input, check its validity then lauch the computation."""
 
     try:
         floor_height = int(input("Floor to floor height (in cm) : "))
@@ -19,7 +19,7 @@ def askInput():
         askInput()
 
 def computeBlondel(available_height, available_length):
-    """Calculate a stair configuration that meets as closely as possible the Blondel criteria.
+    """Compute a stair configuration that meets as closely as possible the Blondel criteria.
     (i.e. : (2 * RISER) + TREAD = 61)"""
 
     BLONDEL_TARGET = 61
@@ -57,13 +57,13 @@ def computeBlondel(available_height, available_length):
                         showResults(tread, riser, steps)
 
                     else:
-                        Error()
+                        showErrorMessage()
     else:
         print("Ok.")
 
 def showResults(tread, riser, steps):
     """Show the results in the Terminal. Then start the programm again.
-    (Usually I compute a bunch of stairs in a row, so I wanted a loop)"""
+    (Usually I compute a bunch of stairs in a row, that's why I made the programm loop)"""
 
     blondel = round(2 * riser + tread, 2)
 
@@ -77,7 +77,7 @@ def showResults(tread, riser, steps):
     print("Blondel : ", blondel)
 
     if steps < 25 and steps >1: # Don't draw the stair diagramm if there are too many steps.
-        DrawResults(steps, tread, riser)
+        drawResults(steps, tread, riser)
 
     else:
         total_length = str(round((tread*steps),2))
@@ -91,7 +91,7 @@ def showResults(tread, riser, steps):
 
     askInput()
 
-def DrawResults (steps, tread, riser):
+def drawResults (steps, tread, riser):
     """Draw a stair diagramm in the Terminal, with the computed number of steps."""
 
     total_length = str(round((tread*steps),2))
@@ -117,7 +117,7 @@ def DrawResults (steps, tread, riser):
     print("   |"+ space + "|___")
     print("_  |"+ floor + "____|" + "< Total length = " + total_length + " cm")
 
-def Error():
+def showErrorMessage():
     """Show an error message. And start the programm again"""
 
     print("")
