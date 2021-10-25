@@ -1,11 +1,13 @@
 # Stair calculator
  ## Before starting
  
-This is the first time I write Python code, so it might be garbage. Indeed, for the sake of this assignment and for cross-platform compatibility reasons, I've translated some Visual Basic code I wrote during the first lockdown. Therefore, it may not be the most optimal code.
- 
- ## Description
+This is the first time I write Python code, so it might be bad. Indeed, for the sake of this assignment, I tried my best to translate some Visual Basic (Windows only) code I wrote during the first lockdown into Python (platform agnostic). Therefore, it may not be the most optimal code.
+
+## Description
  
 ![Alt text](Images/Screenshot.jpg "Screenshot")
+
+This program computes a straight stair based on the Blondel formula (2R + T = 61).
 
 ## Getting started
 
