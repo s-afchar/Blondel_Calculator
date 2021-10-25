@@ -35,17 +35,17 @@ def computeBlondel(available_height, available_length):
         riser = available_height / steps
         tread = BLONDEL_TARGET - 2 * riser
 
-        if tread >= TREAD_MIN and tread <= TREAD_MAX and tread * steps <= available_length:
+        if checkSteps(tread, TREAD_MIN, TREAD_MAX, steps, available_length)==False:
             showResults(tread, riser, steps)
 
         else:
             tread = round(available_length / steps)
-            if tread >= TREAD_MIN and tread <= TREAD_MAX and tread * steps <= available_length:
+            if checkSteps(tread, TREAD_MIN, TREAD_MAX, steps, available_length)==False:
                 showResults(tread, riser, steps)
 
             else:
                 tread = math.floor(available_length / steps)
-                if tread >= TREAD_MIN and tread <= TREAD_MAX and tread * steps <= available_length:
+                if checkSteps(tread, TREAD_MIN, TREAD_MAX, steps, available_length)==False:
                     showResults(tread, riser, steps)
 
                 else:
@@ -53,13 +53,20 @@ def computeBlondel(available_height, available_length):
                         blondel = blondel - 0.01
                         tread = blondel - 2 * riser
 
-                    if tread >= TREAD_MIN and tread <= TREAD_MAX and tread * steps <= available_length:
+                    if checkSteps(tread, TREAD_MIN, TREAD_MAX, steps, available_length)==False:
                         showResults(tread, riser, steps)
 
                     else:
                         showErrorMessage()
     else:
         print("Ok.")
+
+def checkSteps(tread, TREAD_MIN, TREAD_MAX, steps, available_length):
+
+    if tread >= TREAD_MIN and tread <= TREAD_MAX and tread * steps <= available_length:
+        return False
+    else:
+        return True
 
 def showResults(tread, riser, steps):
     """Show the results in the Terminal. Then start the programm again.
